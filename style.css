@@ -1,0 +1,726 @@
+/* ============================================
+   Valentine Theme - style.css
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap');
+
+:root {
+  --valentine-pink: #e91e63;
+  --valentine-rose: #f06292;
+  --valentine-light: #f8bbd9;
+  --valentine-soft: #fce4ec;
+  --valentine-dark: #ad1457;
+  --valentine-gold: #ffd54f;
+  --valentine-white: #fff5f8;
+  --shadow-soft: 0 8px 32px rgba(233, 30, 99, 0.15);
+  --shadow-glow: 0 0 30px rgba(244, 67, 54, 0.3);
+  --radius-card: 20px;
+  --radius-pill: 999px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(135deg, #1a0a0f 0%, #2d1b2e 35%, #1a0a0f 100%);
+  color: var(--valentine-white);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background overlay (untuk JS yang set background image) */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.35;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Kotak / Card container */
+.kotak {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  margin-top: 100px;
+  max-width: 100%;
+  width: 90%;
+  min-width: 280px;
+  max-width: 420px;
+  min-height: 200px;
+  padding: 1.5rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-card);
+  border: 2px solid rgba(248, 187, 217, 0.4);
+  box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+}
+
+.kotak h2 {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  color: var(--valentine-light);
+  text-shadow: 0 2px 10px rgba(233, 30, 99, 0.4);
+  margin-bottom: 0.5rem;
+}
+
+.kotak p {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+}
+
+/* Dekorasi sudut */
+.decor {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--valentine-rose);
+  border-radius: 4px;
+  z-index: 3;
+  opacity: 0.9;
+}
+
+.decor-tl {
+  top: 12px;
+  left: 12px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.decor-br {
+  bottom: 12px;
+  right: 12px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Sembunyi */
+.sembunyi {
+  display: none !important;
+}
+
+/* ========== Tombol ========== */
+.reset,
+.tombol {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.reset button,
+.tombol button,
+#lanjut,
+#ulang,
+#tombolBuka {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
+  background: linear-gradient(135deg, var(--valentine-pink), var(--valentine-dark));
+  color: white;
+  box-shadow: 0 4px 20px rgba(233, 30, 99, 0.4);
+}
+
+.reset button:hover,
+.tombol button:hover,
+#lanjut:hover,
+#ulang:hover,
+#tombolBuka:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 28px rgba(233, 30, 99, 0.5);
+}
+
+.reset button:active,
+.tombol button:active {
+  transform: scale(0.98);
+}
+
+/* ========== Halaman 1 - Envelope (jika ada di DOM) ========== */
+#hal1 {
+  position: relative;
+  z-index: 1;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.envlope-wrapper {
+  position: relative;
+  margin-top: 1rem;
+  overflow: visible;
+}
+
+#envelope {
+  position: relative;
+  margin: 0 auto;
+  width: 180px;
+  height: 120px;
+  overflow: visible;
+  background: linear-gradient(145deg, var(--valentine-rose), var(--valentine-pink));
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.1);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+}
+
+/* Lapisan penutup: menutupi kertas saat amplop tertutup (depan amplop) */
+#envelope .front-cover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, var(--valentine-rose), var(--valentine-pink));
+  border-radius: 0 0 8px 8px;
+  z-index: 5;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+#envelope.open .front-cover {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Bagian depan amplop (flap + pocket) — di atas penutup */
+#envelope .front {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0;
+  top: 0;
+  z-index: 10;
+}
+
+#envelope .front.flap {
+  border-left: 90px solid transparent;
+  border-right: 90px solid transparent;
+  border-bottom: 60px solid transparent;
+  border-top: 60px solid var(--valentine-rose);
+  transform-origin: top center;
+  transition: transform 0.8s ease, z-index 0s;
+  pointer-events: none;
+}
+
+#envelope .front.pocket {
+  top: 60px;
+  border-left: 90px solid rgba(248, 187, 217, 0.95);
+  border-right: 90px solid rgba(248, 187, 217, 0.95);
+  border-bottom: 60px solid rgba(212, 175, 184, 0.95);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+#envelope.close .front.flap {
+  transform: rotateX(0deg);
+}
+
+#envelope.open .front.flap {
+  transform: rotateX(-180deg);
+  z-index: 0;
+}
+
+/* Kertas surat — saat tertutup di BELAKANG lapisan penutup amplop */
+#envelope .letter {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  width: 85%;
+  height: 90%;
+  background: linear-gradient(180deg, #fff9fc 0%, #fce4ec 100%);
+  border-radius: 8px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  padding: 1rem;
+  color: var(--valentine-dark);
+  z-index: 0;
+  transition: transform 0.7s cubic-bezier(0.34, 1.2, 0.64, 1), z-index 0s;
+  transition-delay: 0s;
+}
+
+/* Saat amplop terbuka: kertas di atas segitiga penutup dan naik ke atas */
+#envelope.open .letter {
+  transform: translateX(-50%) translateY(-95px);
+  transition-delay: 0.35s;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  z-index: 15;
+}
+
+.message {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ========== Hati & Sparkles (dekorasi) ========== */
+.heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--valentine-rose);
+  transform: rotate(-45deg);
+  animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--valentine-rose);
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+
+.heart::after {
+  left: -10px;
+  top: 0;
+}
+
+.heart.a1 { top: 10%; left: 15%; animation-delay: 0s; opacity: 0.8; }
+.heart.a2 { top: 20%; right: 20%; animation-delay: 0.3s; opacity: 0.6; }
+.heart.a3 { bottom: 25%; left: 10%; animation-delay: 0.6s; opacity: 0.7; }
+
+@keyframes heartbeat {
+  0%, 100% { transform: rotate(-45deg) scale(1); }
+  50% { transform: rotate(-45deg) scale(1.1); }
+}
+
+.sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--valentine-gold);
+  border-radius: 50%;
+  animation: sparkle 2s ease-in-out infinite;
+  box-shadow: 0 0 10px var(--valentine-gold);
+}
+
+.sparkle.s1 { top: 15%; left: 20%; animation-delay: 0s; }
+.sparkle.s2 { top: 60%; right: 25%; animation-delay: 0.7s; }
+.sparkle.s3 { bottom: 20%; left: 30%; animation-delay: 1.4s; }
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* Hati jatuh (dibuat JS) */
+.hati {
+  position: fixed;
+  top: -50px;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  z-index: 999;
+  animation: fallHeart 4s linear forwards;
+}
+
+.hati svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 6px rgba(244, 67, 54, 0.6));
+}
+
+.hati .line {
+  fill: var(--valentine-rose);
+}
+
+@keyframes fallHeart {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ========== Halaman 2 - Memory Game ========== */
+#hal2 .kotak {
+  padding: 1.25rem;
+}
+
+/* Slot foto di atas judul game */
+.foto-hal2 {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 0 auto 0.75rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+#hal2 h2 {
+  font-size: 1.35rem;
+}
+
+#hal2 p {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+#papanGame {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 320px;
+  margin: 0 auto 1rem;
+  padding: 0.5rem;
+}
+
+.kartu {
+  aspect-ratio: 1;
+  cursor: pointer;
+  perspective: 600px;
+}
+
+.dalemKartu {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+}
+
+.kartu.balik .dalemKartu {
+  transform: rotateY(180deg);
+}
+
+.depanKartu,
+.belakangKartu {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.depanKartu {
+  background: linear-gradient(145deg, var(--valentine-pink), var(--valentine-dark));
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.depanKartu::after {
+  content: '💕';
+  font-size: 1.8rem;
+  opacity: 0.6;
+}
+
+.belakangKartu {
+  background: linear-gradient(145deg, var(--valentine-soft), #fff);
+  color: var(--valentine-dark);
+  font-size: 2rem;
+  transform: rotateY(180deg);
+  border: 2px solid var(--valentine-light);
+}
+
+#statusGame {
+  font-size: 0.9rem;
+  color: var(--valentine-light);
+  min-height: 1.5em;
+  margin-bottom: 0.5rem;
+}
+
+#lanjut,
+#ulang {
+  margin: 0.25rem;
+}
+
+/* ========== Halaman 3 - Gift Box ========== */
+.gift-container {
+  position: relative;
+  height: 180px;
+  margin: 1rem auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.gift {
+  position: relative;
+  width: 120px;
+  height: 100px;
+  background: linear-gradient(145deg, var(--valentine-pink), var(--valentine-dark));
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), border-radius 0.5s ease;
+}
+
+.gift .lid {
+  position: absolute;
+  top: -18px;
+  left: -4px;
+  width: 128px;
+  height: 22px;
+  background: linear-gradient(90deg, var(--valentine-rose), var(--valentine-pink));
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  transform-origin: top center;
+  transition: transform 0.6s ease;
+}
+
+.gift.open .lid {
+  transform: rotateX(-110deg);
+}
+
+.ribbon-horizontal,
+.ribbon-vertical {
+  position: absolute;
+  background: var(--valentine-gold);
+  box-shadow: 0 0 8px rgba(255, 213, 79, 0.5);
+  transition: opacity 0.4s ease;
+}
+
+.ribbon-horizontal {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  transform: translateY(-50%);
+}
+
+.ribbon-vertical {
+  left: 50%;
+  top: 0;
+  width: 12px;
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+.bow {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  transition: transform 0.5s ease, opacity 0.4s ease;
+}
+
+.bow::before,
+.bow::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--valentine-gold);
+  border-radius: 50% 50% 50% 0;
+  box-shadow: 0 0 10px rgba(255, 213, 79, 0.4);
+}
+
+.bow::before {
+  left: 0;
+  transform: rotate(-45deg);
+}
+
+.bow::after {
+  right: 0;
+  transform: rotate(45deg);
+}
+
+.heart-inside {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+  z-index: 2;
+}
+
+.gift.open .heart-inside {
+  transform: translate(-50%, -50%) scale(1.2);
+  opacity: 1;
+}
+
+.heart-with-text svg {
+  width: 100%;
+  height: 100%;
+  color: #e91e63;
+  filter: drop-shadow(0 0 12px rgba(233, 30, 99, 0.8));
+}
+
+.love-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Dancing Script', cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 0 10px rgba(0,0,0,0.5), 0 0 20px rgba(233, 30, 99, 0.6);
+  pointer-events: none;
+}
+
+/* ========== Halaman 4 - Pesan Akhir ========== */
+#containerPesan {
+  max-height: 45vh;
+  overflow-y: auto;
+  padding: 1rem;
+  text-align: left;
+  margin: 0.5rem 0;
+  scroll-behavior: smooth;
+}
+
+#containerPesan::-webkit-scrollbar {
+  width: 6px;
+}
+
+#containerPesan::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+}
+
+#containerPesan::-webkit-scrollbar-thumb {
+  background: var(--valentine-rose);
+  border-radius: 3px;
+}
+
+#teksCinta,
+#pesanAkhir,
+#teksLucu {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 0.75rem;
+}
+
+#teksCinta {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.4rem;
+}
+
+.stiker {
+  margin: 0.5rem auto;
+  text-align: center;
+  transition: transform 0.4s ease;
+}
+
+.stiker img {
+  max-width: 120px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* ========== Circle animation (dekorasi) ========== */
+.circ {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.circ > div {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--valentine-rose);
+  opacity: 0.5;
+  animation: circPulse 1.5s ease-in-out infinite;
+}
+
+.circ > div:nth-child(1) { animation-delay: 0s; }
+.circ > div:nth-child(2) { animation-delay: 0.15s; }
+.circ > div:nth-child(3) { animation-delay: 0.3s; }
+.circ > div:nth-child(4) { animation-delay: 0.45s; }
+.circ > div:nth-child(5) { animation-delay: 0.6s; }
+.circ > div:nth-child(6) { animation-delay: 0.75s; }
+.circ > div:nth-child(7) { animation-delay: 0.9s; }
+.circ > div:nth-child(8) { animation-delay: 1.05s; }
+.circ > div:nth-child(9) { animation-delay: 1.2s; }
+.circ > div:nth-child(10) { animation-delay: 1.35s; }
+
+@keyframes circPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 600px) {
+  .kotak {
+    margin-top: 80px;
+    padding: 1rem;
+    width: 95%;
+  }
+
+  #papanGame {
+    gap: 8px;
+    max-width: 280px;
+  }
+
+  .belakangKartu {
+    font-size: 1.6rem;
+  }
+
+  .gift-container {
+    height: 150px;
+  }
+
+  .gift {
+    width: 100px;
+    height: 85px;
+  }
+
+  .gift .lid {
+    width: 108px;
+    height: 18px;
+  }
+
+  .heart-inside {
+    width: 50px;
+    height: 50px;
+  }
+
+  .love-text {
+    font-size: 0.85rem;
+  }
+}
